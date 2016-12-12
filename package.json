@@ -4,7 +4,7 @@
   "description": "Minimal routing layer for building JSON APIs with Zeit's micro",
   "main": "./dist/index.js",
   "repository": {
-    "url": "https://github.cim/possibilities/micro-api",
+    "url": "https://github.com/possibilities/micro-api",
     "type": "git"
   },
   "author": "Mike Bannister <mikebannister@gmail.com>",
