@@ -131,7 +131,7 @@ test('gracefully responds to non-existing routes', async t => {
   const missingBody = missingResponse.body
 
   t.deepEqual(missingResponse.statusCode, 404)
-  t.deepEqual(missingBody.message, 'Page not found (GET): /fuff')
+  t.deepEqual(missingBody.message, 'GET /fuff not found')
 })
 
 test('gracefully responds to broken routes', async t => {

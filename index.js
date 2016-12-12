@@ -27,7 +27,7 @@ const microApi = (routeConfigs) => {
     const handler = handlers[route.name]
 
     if (!handler) {
-      const message = `Page not found (${req.method}): ${req.url}`
+      const message = `${req.method} ${req.url} not found`
       return send(res, 404, { message })
     }
 
