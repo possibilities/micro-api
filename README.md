@@ -15,6 +15,8 @@ npm install micro micro-api
 ### Usage
 
 ```javascript
+// index.js
+
 import microApi from 'micro-api'
 import { createApp, readApp } from 'handlers'
 
@@ -37,7 +39,7 @@ export default api
 ### Run
 
 ```
-micro -p 3000 index.js
+micro -p 3000 ./index.js
 ```
 
 See [micro](https://github.com/zeit/micro#documentation) documentation for complete usage.
