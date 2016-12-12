@@ -1,6 +1,6 @@
 {
   "name": "micro-api",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Minimal routing layer for building JSON APIs with Zeit's micro",
   "main": "./dist/index.js",
   "repository": {
