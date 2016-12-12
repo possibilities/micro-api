@@ -9,7 +9,7 @@ Minimal routing layer for building JSON APIs with Zeit's [micro](https://github.
 ### Installation
 
 ```javascript
-yarn add micro micro-api
+yarn add --save micro micro-api
 // OR
 npm install micro micro-api
 ```
