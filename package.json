@@ -1,7 +1,10 @@
 {
   "name": "micro-api",
-  "version": "0.0.2",
   "description": "Minimal routing layer for building JSON APIs with Zeit's micro",
+  "version": "0.0.2",
+  "engines": {
+    "node" : ">=7.2"
+  },
   "main": "./dist/index.js",
   "repository": {
     "url": "https://github.com/possibilities/micro-api",
