@@ -6,6 +6,9 @@
     "node": ">=7.2"
   },
   "main": "./dist/index.js",
+  "files": [
+    "./dist/index.js"
+  ],
   "repository": {
     "url": "https://github.com/possibilities/micro-api",
     "type": "git"
