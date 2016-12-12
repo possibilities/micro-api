@@ -20,6 +20,7 @@ npm install micro micro-api
 // index.js
 
 import microApi from 'micro-api'
+import compress from 'micro-compress'
 import { createApp, readApp } from 'handlers'
 
 const api = microApi([
@@ -35,7 +36,7 @@ const api = microApi([
   },
 ])
 
-export default api
+export default compress(api)
 ```
 
 ### Run
