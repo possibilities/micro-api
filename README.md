@@ -7,9 +7,9 @@ Minimal routing layer for building JSON APIs with Zeit's [micro](https://github.
 ### Installation
 
 ```javascript
-yarn add micro-api
+yarn add micro micro-api
 // OR
-npm install micro-api
+npm install micro micro-api
 ```
 
 ### Usage
@@ -33,3 +33,11 @@ const api = microApi([
 
 export default api
 ```
+
+### Run
+
+```
+micro -p 3000 index.js
+```
+
+See [micro](https://github.com/zeit/micro#documentation) documentation for complete usage.

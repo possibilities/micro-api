@@ -1,6 +1,16 @@
 {
   "name": "micro-api",
+  "version": "0.0.1",
+  "description": "Minimal routing layer for building JSON APIs with Zeit's micro",
+  "main": "./dist/index.js",
+  "repository": {
+    "url": "https://github.cim/possibilities/micro-api",
+    "type": "git"
+  },
+  "author": "Mike Bannister <mikebannister@gmail.com>",
+  "license": "MIT",
   "scripts": {
+    "build": "mkdir -p ./dist && async-to-gen ./index.js > ./dist/index.js",
     "test": "ava --fail-fast --verbose",
     "test:watch": "npm test -- --watch"
   },
