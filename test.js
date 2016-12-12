@@ -1,4 +1,5 @@
 import 'async-to-gen/register'
+import 'babel-polyfill'
 
 import test from 'ava'
 import listen from 'test-listen'
