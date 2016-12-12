@@ -5,9 +5,9 @@
   "engines": {
     "node": ">=7.2"
   },
-  "main": "./dist/index.js",
+  "main": "transpiled-index.js",
   "files": [
-    "./dist/index.js"
+    "transpiled-index.js"
   ],
   "repository": {
     "url": "https://github.com/possibilities/micro-api",
@@ -16,7 +16,7 @@
   "author": "Mike Bannister <mikebannister@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "mkdir -p ./dist && async-to-gen ./index.js > ./dist/index.js",
+    "build": "mkdir -p ./dist && async-to-gen ./index.js > ./transpiled-index.js",
     "prepublish": "npm run build",
     "test": "ava --fail-fast --verbose",
     "test:watch": "npm test -- --watch"
