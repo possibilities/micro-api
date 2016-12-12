@@ -2,7 +2,7 @@
 
 ### Summary
 
-Minimal routing layer for building JSON APIs with [micro](https://github.com/zeit/micro)
+Minimal routing layer for building JSON APIs with Zeit's [micro](https://github.com/zeit/micro)
 
 ### Installation
 
