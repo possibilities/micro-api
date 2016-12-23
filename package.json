@@ -16,7 +16,7 @@
   "author": "Mike Bannister <mikebannister@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "mkdir -p ./dist && async-to-gen ./index.js > ./transpiled-index.js",
+    "build": "async-to-gen ./index.js > ./transpiled-index.js",
     "prepublish": "npm run build",
     "test": "ava --fail-fast --verbose",
     "test:watch": "npm test -- --watch"
