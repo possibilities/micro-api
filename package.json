@@ -3,7 +3,7 @@
   "description": "Minimal routing layer for building JSON APIs with Zeit's micro",
   "version": "0.0.4",
   "engines": {
-    "node": ">=7.2"
+    "node": ">=6"
   },
   "main": "transpiled-index.js",
   "files": [
