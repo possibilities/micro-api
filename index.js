@@ -43,7 +43,9 @@ const microApi = (routeConfigs) => {
       const resBody = await handler(reqBody, route.options)
       send(res, 200, resBody)
     } catch(error) {
-      return send(res, 500, { message: error.message })
+      // Allow a simple string or an error with message string
+      const message = typeof(error) === 'string' ? error : error.message
+      return send(res, 500, { message })
     }
   }
 }

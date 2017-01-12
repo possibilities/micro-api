@@ -150,3 +150,20 @@ test('gracefully responds to broken routes', async t => {
   t.deepEqual(brokenResponse.statusCode, 500)
   t.deepEqual(brokenBody.message, 'Broken!')
 })
+
+test('allows routes to throw error messages as strings', async t => {
+  const api = microApi([{
+    method: 'get',
+    path: '/baz',
+    handler: () => { throw 'Broken!' }
+  }])
+
+  const router = micro(api)
+  const url = await listen(router)
+
+  const brokenResponse = await request.get(`${url}/baz`, testRequestOptions)
+  const brokenBody = brokenResponse.body
+
+  t.deepEqual(brokenResponse.statusCode, 500)
+  t.deepEqual(brokenBody.message, 'Broken!')
+})
