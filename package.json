@@ -34,6 +34,6 @@
     "request-promise": "^4.1.1"
   },
   "peerDependencies": {
-    "micro": "^6.1.0"
+    "micro": ">=6.1.0"
   }
 }
