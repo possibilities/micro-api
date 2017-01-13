@@ -2,6 +2,11 @@ const createRouter = require('uniloc')
 const uuid = require('uuid')
 const { json, send } = require('micro')
 
+const sendPageNotFound = (req, res) => {
+  const message = `${req.method} ${req.url} not found`
+  return send(res, 404, { message })
+}
+
 const microApi = (routeConfigs) => {
   let routes = {}
   let handlers = {}
@@ -26,10 +31,7 @@ const microApi = (routeConfigs) => {
     const route = router.lookup(req.url, req.method)
     const handler = handlers[route.name]
 
-    if (!handler) {
-      const message = `${req.method} ${req.url} not found`
-      return send(res, 404, { message })
-    }
+    if (!handler) return sendPageNotFound(req, res)
 
     try {
       let reqBody
@@ -41,7 +43,13 @@ const microApi = (routeConfigs) => {
       }
 
       const resBody = await handler(reqBody, route.options)
-      send(res, 200, resBody)
+      // If there's a response return it
+      if (resBody) {
+        send(res, 200, resBody)
+      // If there's no response treat it as missing
+      } else {
+        sendPageNotFound(req, res)
+      }
     } catch(error) {
       // Allow a simple string or an error with message string
       const message = typeof(error) === 'string' ? error : error.message

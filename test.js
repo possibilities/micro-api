@@ -167,3 +167,20 @@ test('allows routes to throw error messages as strings', async t => {
   t.deepEqual(brokenResponse.statusCode, 500)
   t.deepEqual(brokenBody.message, 'Broken!')
 })
+
+test('raises a 404 when handler returns nothing', async t => {
+  const api = microApi([{
+    method: 'get',
+    path: '/baz',
+    handler: () => {}
+  }])
+
+  const router = micro(api)
+  const url = await listen(router)
+
+  const missingResponse = await request.get(`${url}/baz`, testRequestOptions)
+  const missingBody = missingResponse.body
+
+  t.deepEqual(missingResponse.statusCode, 404)
+  t.deepEqual(missingBody.message, 'GET /baz not found')
+})
