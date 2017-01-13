@@ -18,25 +18,46 @@ npm install micro micro-api
 
 ```javascript
 // index.js
-
-import microApi from 'micro-api'
-import compress from 'micro-compress'
-import { createApp, readApp } from 'handlers'
+const microApi = require('./index')
+const handlers = require('./handlers')
 
 const api = microApi([
   {
     method: 'post',
-    path: '/apps',
-    handler: createApp,
+    path: '/foos',
+    handler: handlers.createFoo,
   },
   {
     method: 'get',
-    path: '/apps/:appId',
-    handler: readApp,
+    path: '/foos/:fooId',
+    handler: handlers.showFoo,
   },
 ])
 
-export default compress(api)
+module.exports = api
+```
+
+```javascript
+// handlers.js
+const uuid = require('uuid')
+
+const foos = []
+
+const createFoo = foo => {
+  const newFoo = Object.assign(
+    {},
+    foo,
+    { id: uuid() }
+  )
+
+  foos.push(newFoo)
+
+  return newFoo
+}
+
+const showFoo = (body, { fooId }) => foos.find(f => f.id === fooId)
+
+module.exports = { createFoo, showFoo }
 ```
 
 ### Run
