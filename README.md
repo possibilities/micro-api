@@ -2,7 +2,7 @@
 
 ### Summary
 
-Minimal routing layer for building JSON APIs with Zeit's [micro](https://github.com/zeit/micro)
+Minimal routing layer for building JSON APIs with Zeit's [Micro](https://github.com/zeit/micro)
 
 [![CircleCI](https://circleci.com/gh/possibilities/micro-api.svg?style=svg)](https://circleci.com/gh/possibilities/micro-api)
 
