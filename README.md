@@ -9,8 +9,6 @@ Minimal routing layer for building JSON APIs with Zeit's [Micro](https://github.
 ### Installation
 
 ```javascript
-yarn add --save micro micro-api
-// OR
 npm install micro micro-api
 ```
 
