@@ -14,6 +14,8 @@ npm install micro micro-api
 
 ### Usage
 
+Declare your API's routes
+
 ```javascript
 // index.js
 const microApi = require('./index')
@@ -34,6 +36,8 @@ const api = microApi([
 
 module.exports = api
 ```
+
+Define some micro-compatible handlers
 
 ```javascript
 // handlers.js
