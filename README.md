@@ -39,20 +39,18 @@ module.exports = api
 // handlers.js
 const uuid = require('uuid')
 
+// In memory database
 const foos = []
 
 const createFoo = foo => {
-  const newFoo = Object.assign(
-    {},
-    foo,
-    { id: uuid() }
-  )
-
+  // Build up the new item
+  const newFoo = Object.assign({}, foo, { id: uuid() })
+  // Add it to the database
   foos.push(newFoo)
-
   return newFoo
 }
 
+// Find and return by id
 const showFoo = (body, { fooId }) => foos.find(f => f.id === fooId)
 
 module.exports = { createFoo, showFoo }
