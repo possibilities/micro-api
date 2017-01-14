@@ -66,4 +66,4 @@ module.exports = { createFoo, showFoo }
 micro -p 3000 ./index.js
 ```
 
-See [micro](https://github.com/zeit/micro#documentation) documentation for complete usage.
+See [Micro](https://github.com/zeit/micro#documentation) documentation for complete usage.
