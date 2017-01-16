@@ -7,7 +7,7 @@ const sendPageNotFound = (req, res) => {
   return send(res, 404, { message })
 }
 
-const microApi = (routeConfigs) => {
+const microApi = routeConfigs => {
   let routes = {}
   let handlers = {}
 
@@ -42,7 +42,11 @@ const microApi = (routeConfigs) => {
         reqBody = {}
       }
 
-      const resBody = await handler(reqBody, route.options)
+      const resBody = await handler({
+        body: reqBody,
+        params: route.options
+      })
+
       // If there's a response return it
       if (resBody) {
         send(res, 200, resBody)

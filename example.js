@@ -3,19 +3,13 @@ const uuid = require('uuid')
 
 const foos = []
 
-const createFoo = foo => {
-  const newFoo = Object.assign(
-    {},
-    foo,
-    { id: uuid() }
-  )
-
+const createFoo = ({ body }) => {
+  const newFoo = Object.assign({}, body, { id: uuid() })
   foos.push(newFoo)
-
   return newFoo
 }
 
-const showFoo = (body, { fooId }) => foos.find(f => f.id === fooId)
+const showFoo = ({ params: { fooId } }) => foos.find(f => f.id === fooId)
 
 const api = microApi([
   {

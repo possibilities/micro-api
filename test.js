@@ -81,7 +81,7 @@ test('passes request body to handler', async t => {
     {
       method: 'post',
       path: '/foos',
-      handler: body => body,
+      handler: ({ body }) => body,
     },
   ])
 
@@ -106,7 +106,7 @@ test('passes URL params to handler', async t => {
     {
       method: 'get',
       path: '/foos/:fooId',
-      handler: (body, params) => params,
+      handler: ({ body, params }) => params,
     },
   ])
 

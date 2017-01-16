@@ -46,16 +46,16 @@ const uuid = require('uuid')
 // In memory database
 const foos = []
 
-const createFoo = foo => {
+const createFoo = ({ body }) => {
   // Build up the new item
-  const newFoo = Object.assign({}, foo, { id: uuid() })
+  const newFoo = Object.assign({}, body, { id: uuid() })
   // Add it to the database
   foos.push(newFoo)
   return newFoo
 }
 
 // Find and return by id
-const showFoo = (body, { fooId }) => foos.find(f => f.id === fooId)
+const showFoo = ({ params: { fooId } }) => foos.find(f => f.id === fooId)
 
 module.exports = { createFoo, showFoo }
 ```
