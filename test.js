@@ -50,20 +50,25 @@ test('passes through request and response', async t => {
   const api = microApi([
     {
       method: 'get',
-      path: '/type-info',
-      handler: ({ req, res }) => ({ reqType: typeof req, resType: typeof res }),
+      path: '/echoheader',
+      handler: ({ req, res }) => {
+        res.setHeader('foo', req.headers.foo)
+        return {}
+      }
     },
   ])
 
   const router = micro(api)
   const url = await listen(router)
 
-  const getResponse = await request.get(`${url}/type-info`, testRequestOptions)
-  const getBody = getResponse.body
+  const getResponse = await request.get(`${url}/echoheader`, Object.assign(
+    {},
+    testRequestOptions,
+    { headers: { foo: 'bar' } }
+  ))
 
   t.deepEqual(getResponse.statusCode, 200)
-  t.deepEqual(getBody.reqType, 'object')
-  t.deepEqual(getBody.resType, 'object')
+  t.deepEqual(getResponse.headers.foo, 'bar')
 })
 
 test('routes based on path', async t => {
