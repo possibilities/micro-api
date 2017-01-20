@@ -44,7 +44,8 @@ const microApi = routeConfigs => {
 
       const resBody = await handler({
         body: reqBody,
-        params: route.options
+        params: route.options,
+        headers: req.headers
       })
 
       // If there's a response return it
