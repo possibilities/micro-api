@@ -46,6 +46,26 @@ test('routes based on method', async t => {
   t.deepEqual(postBody.name, 'post-foos')
 })
 
+test('passes through request and response', async t => {
+  const api = microApi([
+    {
+      method: 'get',
+      path: '/type-info',
+      handler: ({ req, res }) => ({ reqType: typeof req, resType: typeof res }),
+    },
+  ])
+
+  const router = micro(api)
+  const url = await listen(router)
+
+  const getResponse = await request.get(`${url}/type-info`, testRequestOptions)
+  const getBody = getResponse.body
+
+  t.deepEqual(getResponse.statusCode, 200)
+  t.deepEqual(getBody.reqType, 'object')
+  t.deepEqual(getBody.resType, 'object')
+})
+
 test('routes based on path', async t => {
   const api = microApi([
     {

@@ -43,6 +43,8 @@ const microApi = routeConfigs => {
       }
 
       const resBody = await handler({
+        res,
+        req,
         body: reqBody,
         params: route.options
       })
