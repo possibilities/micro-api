@@ -46,7 +46,8 @@ const microApi = routeConfigs => {
         res,
         req,
         body: reqBody,
-        params: route.options
+        params: route.options,
+        headers: req.headers
       })
 
       // If there's a response return it
