@@ -113,12 +113,18 @@ test('passes request body to handler', async t => {
   const router = micro(api)
   const url = await listen(router)
 
-  const foosResponse = await request.post(`${url}/foos`, {
-    ...testRequestOptions,
-    body: {
-      foo: 'bar'
-    }
-  })
+  const foosResponse = await request.post(
+    `${url}/foos`,
+    Object.assign(
+      {},
+      testRequestOptions,
+      {
+        body: {
+          foo: 'bar'
+        }
+      }
+    )
+  )
 
   const foosBody = foosResponse.body
 
