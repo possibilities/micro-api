@@ -18,7 +18,7 @@ Declare your API's routes
 
 ```javascript
 // index.js
-const microApi = require('./index')
+const microApi = require('micro-api')
 const handlers = require('./handlers')
 
 const api = microApi([
