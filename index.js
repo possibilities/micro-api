@@ -1,9 +1,14 @@
 const createRouter = require('uniloc')
 const uuid = require('uuid')
-const { json, send } = require('micro')
+const { json, send, createError } = require('micro')
 
 const sendPageNotFound = (req, res) => {
   const message = `${req.method} ${req.url} not found`
+
+  if (process.env.NODE_ENV === 'development') {
+    console.info(message)
+  }
+
   return send(res, 404, { message })
 }
 
@@ -58,9 +63,9 @@ const microApi = routeConfigs => {
         sendPageNotFound(req, res)
       }
     } catch(error) {
-      // Allow a simple string or an error with message string
-      const message = typeof(error) === 'string' ? error : error.message
-      return send(res, 500, { message })
+      const code = 500
+      const { message, stack } = error
+      send(res, code, { message, stack, code })
     }
   }
 }
