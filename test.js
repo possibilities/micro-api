@@ -5,7 +5,7 @@ import test from 'ava'
 import listen from 'test-listen'
 
 import microApi from './index'
-import micro, { send } from 'micro'
+import micro from 'micro'
 import request from 'request-promise'
 
 const testRequestOptions = {
@@ -13,7 +13,7 @@ const testRequestOptions = {
   // Otherwise request-promise just gives the body
   resolveWithFullResponse: true,
   // Don't reject messages that come back with error code (e.g. 404, 500s)
-  simple: false,
+  simple: false
 }
 
 test('routes based on method', async t => {
@@ -21,13 +21,13 @@ test('routes based on method', async t => {
     {
       method: 'post',
       path: '/foos',
-      handler: () => ({ name: 'post-foos' }),
+      handler: () => ({ name: 'post-foos' })
     },
     {
       method: 'get',
       path: '/foos',
-      handler: () => ({ name: 'get-foos' }),
-    },
+      handler: () => ({ name: 'get-foos' })
+    }
   ])
 
   const router = micro(api)
@@ -55,7 +55,7 @@ test('passes through request and response', async t => {
         res.setHeader('foo', req.headers.foo)
         return {}
       }
-    },
+    }
   ])
 
   const router = micro(api)
@@ -76,13 +76,13 @@ test('routes based on path', async t => {
     {
       method: 'get',
       path: '/foos',
-      handler: () => ({ name: 'foos' }),
+      handler: () => ({ name: 'foos' })
     },
     {
       method: 'get',
       path: '/bars',
-      handler: () => ({ name: 'bars' }),
-    },
+      handler: () => ({ name: 'bars' })
+    }
   ])
 
   const router = micro(api)
@@ -106,8 +106,8 @@ test('passes request body to handler', async t => {
     {
       method: 'post',
       path: '/foos',
-      handler: ({ body }) => body,
-    },
+      handler: ({ body }) => body
+    }
   ])
 
   const router = micro(api)
@@ -137,8 +137,8 @@ test('passes URL params to handler', async t => {
     {
       method: 'get',
       path: '/foos/:fooId',
-      handler: ({ body, params }) => params,
-    },
+      handler: ({ body, params }) => params
+    }
   ])
 
   const router = micro(api)

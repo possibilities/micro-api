@@ -1,6 +1,6 @@
 const createRouter = require('uniloc')
 const uuid = require('uuid')
-const { json, send, createError } = require('micro')
+const { json, send } = require('micro')
 
 const debug = message => {
   if (process.env.NODE_ENV === 'development') {
@@ -45,7 +45,7 @@ const microApi = routeConfigs => {
 
       try {
         reqBody = await json(req)
-      } catch(error) {
+      } catch (error) {
         reqBody = {}
       }
 
@@ -64,7 +64,7 @@ const microApi = routeConfigs => {
       } else {
         sendPageNotFound(req, res)
       }
-    } catch(error) {
+    } catch (error) {
       const code = 500
       const { message, stack } = error
       debug(error)

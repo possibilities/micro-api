@@ -15,13 +15,13 @@ const api = microApi([
   {
     method: 'post',
     path: '/foos',
-    handler: createFoo,
+    handler: createFoo
   },
   {
     method: 'get',
     path: '/foos/:fooId',
-    handler: showFoo,
-  },
+    handler: showFoo
+  }
 ])
 
 module.exports = api

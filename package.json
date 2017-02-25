@@ -19,9 +19,12 @@
     "build": "async-to-gen ./index.js > ./transpiled-index.js",
     "prepublish": "npm run build",
     "test": "NODE_ENV=development ava --fail-fast --verbose",
-    "test:watch": "NODE_ENV=development ava --fail-fast --verbose --watch"
+    "test:watch": "NODE_ENV=development ava --fail-fast --verbose --watch",
+    "lint": "standard",
+    "pretest": "standard"
   },
   "dependencies": {
+    "standard": "^8.6.0",
     "test-listen": "^1.0.0",
     "uniloc": "^0.3.0",
     "uuid": "^3.0.1"
