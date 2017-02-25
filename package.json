@@ -18,8 +18,8 @@
   "scripts": {
     "build": "async-to-gen ./index.js > ./transpiled-index.js",
     "prepublish": "npm run build",
-    "test": "ava --fail-fast --verbose",
-    "test:watch": "npm test -- --watch"
+    "test": "NODE_ENV=development ava --fail-fast --verbose",
+    "test:watch": "NODE_ENV=development ava --fail-fast --verbose --watch"
   },
   "dependencies": {
     "test-listen": "^1.0.0",
