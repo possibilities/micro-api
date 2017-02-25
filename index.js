@@ -4,6 +4,11 @@ const { json, send } = require('micro')
 
 const sendPageNotFound = (req, res) => {
   const message = `${req.method} ${req.url} not found`
+
+  if (process.env.NODE_ENV === 'development') {
+    console.info(message)
+  }
+
   return send(res, 404, { message })
 }
 
