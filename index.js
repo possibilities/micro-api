@@ -65,8 +65,8 @@ const microApi = routeConfigs => {
         sendPageNotFound(req, res)
       }
     } catch (error) {
-      const code = 500
-      const { message, stack } = error
+      const { message, stack, statusCode } = error
+      const code = statusCode || 500
       debug(error)
       send(res, code, { message, stack, code })
     }
