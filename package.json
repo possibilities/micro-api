@@ -34,7 +34,7 @@
     "ava": "^0.18.2",
     "babel-polyfill": "^6.20.0",
     "micro": ">=6.1.0",
-    "request": "^2.79.0",
+    "request": "^2.81.0",
     "request-promise": "^4.1.1"
   },
   "peerDependencies": {
