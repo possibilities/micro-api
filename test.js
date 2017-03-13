@@ -200,3 +200,23 @@ test('raises a 404 when handler returns nothing', async t => {
   t.deepEqual(missingResponse.statusCode, 404)
   t.deepEqual(missingBody.message, 'GET /baz not found')
 })
+
+test('handle custom error status code', async t => {
+  const api = microApi([{
+    method: 'get',
+    path: '/baz',
+    handler: () => {
+      const e = new Error('Custom 400 error.')
+      e.statusCode = 400
+      throw e
+    }
+  }])
+
+  const router = micro(api)
+  const url = await listen(router)
+
+  const missingResponse = await request.get(`${url}/baz`, testRequestOptions)
+  const missingBody = missingResponse.body
+  t.deepEqual(missingResponse.statusCode, 400)
+  t.deepEqual(missingBody.message, 'Custom 400 error.')
+})
