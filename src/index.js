@@ -2,6 +2,8 @@ const createRouter = require('uniloc')
 const uuid = require('uuid')
 const { json, send } = require('micro')
 
+require('babel-polyfill')
+
 const debug = message => {
   if (process.env.NODE_ENV === 'development') {
     console.error(message)
