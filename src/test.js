@@ -61,11 +61,13 @@ test('passes through request and response', async t => {
   const router = micro(api)
   const url = await listen(router)
 
-  const getResponse = await request.get(`${url}/echoheader`, Object.assign(
-    {},
-    testRequestOptions,
-    { headers: { foo: 'bar' } }
-  ))
+  const getResponse = await request.get(
+    `${url}/echoheader`,
+    {
+      ...testRequestOptions,
+      headers: { foo: 'bar' }
+    }
+  )
 
   t.deepEqual(getResponse.statusCode, 200)
   t.deepEqual(getResponse.headers.foo, 'bar')
@@ -115,15 +117,10 @@ test('passes request body to handler', async t => {
 
   const foosResponse = await request.post(
     `${url}/foos`,
-    Object.assign(
-      {},
-      testRequestOptions,
-      {
-        body: {
-          foo: 'bar'
-        }
-      }
-    )
+    {
+      ...testRequestOptions,
+      body: { foo: 'bar' }
+    }
   )
 
   const foosBody = foosResponse.body

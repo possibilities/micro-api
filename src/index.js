@@ -1,8 +1,40 @@
-const createRouter = require('uniloc')
-const uuid = require('uuid')
+require('babel-polyfill')
+
+const pathMatch = require('path-match')
 const { json, send } = require('micro')
 
-require('babel-polyfill')
+const configureRouter = routes => {
+  const pathMatcher = pathMatch()
+
+  routes = routes.map(route => {
+    const matcher = pathMatcher(route.path)
+    const method = route.method.toUpperCase()
+
+    return { ...route, matcher, method }
+  })
+
+  const lookup = (url, method) => {
+    method = method.toUpperCase()
+
+    let params = false
+
+    let route = routes.find(route => {
+      if (route.method !== method) {
+        return false
+      }
+      params = route.matcher(url)
+      return !!params
+    })
+
+    if (route && params) {
+      route = { ...route, params }
+    }
+
+    return route
+  }
+
+  return lookup
+}
 
 const debug = message => {
   if (process.env.NODE_ENV === 'development') {
@@ -16,31 +48,15 @@ const sendPageNotFound = (req, res) => {
   return send(res, 404, { message })
 }
 
-const microApi = routeConfigs => {
-  let routes = {}
-  let handlers = {}
-
-  routeConfigs.forEach(routeConfig => {
-    const id = uuid()
-    const method = routeConfig.method.toUpperCase()
-    routes = Object.assign(
-      routes,
-      { [id]: `${method} ${routeConfig.path}` }
-    )
-
-    handlers = Object.assign(
-      handlers,
-      { [id]: routeConfig.handler }
-    )
-  })
-
-  const router = createRouter(routes)
+const microApi = routes => {
+  const lookup = configureRouter(routes)
 
   return async (req, res) => {
-    const route = router.lookup(req.url, req.method)
-    const handler = handlers[route.name]
+    const route = lookup(req.url, req.method)
 
-    if (!handler) return sendPageNotFound(req, res)
+    if (!route) {
+      return sendPageNotFound(req, res)
+    }
 
     try {
       let reqBody
@@ -51,11 +67,11 @@ const microApi = routeConfigs => {
         reqBody = {}
       }
 
-      const resBody = await handler({
+      const resBody = await route.handler({
         res,
         req,
         body: reqBody,
-        params: route.options,
+        params: route.params,
         headers: req.headers
       })
 

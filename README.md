@@ -48,7 +48,7 @@ const foos = []
 
 const createFoo = ({ body }) => {
   // Build up the new item
-  const newFoo = Object.assign({}, body, { id: uuid() })
+  const newFoo = { ...body, id: uuid() }
   // Add it to the database
   foos.push(newFoo)
   return newFoo
